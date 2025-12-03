@@ -57,7 +57,7 @@ public class TelaLogin2Controller implements Initializable {
                 controle.confirmarSenha(cpf, senha);
                 Usuario login = controle.login(cpf);
                 Sessao.getInstance().setUsuarioLogado(login);
-                trocarTela(anchorPaneTelaLogin, CaminhoArquivo.TELA_CONTA); 
+                trocarTela(anchorPaneTelaLogin, CaminhoArquivo.TELA_INICIAL); 
             } catch(IOException ex) {
               System.err.println("Erro ao carregar tela da conta: " + ex.getMessage());
                 ex.printStackTrace();
