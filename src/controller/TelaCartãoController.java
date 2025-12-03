@@ -62,7 +62,7 @@ public class TelaCartãoController implements Initializable {
             this.textDataCriacao.setText(usuario.getDataCartaoC());
             this.textDataVencimento.setText(usuario.getDataCartaoV());
             this.textCpf.setText(usuario.getCpf());
-            //this.textFieldSaldo.setText(usuario.getSaldoC());
+            this.textFieldSaldo.setText(usuario.getSaldoC());
 
 
 

@@ -49,22 +49,13 @@ public class TelaContaAlterarSenhaController implements Initializable {
         // TODO
         Usuario usuario = Sessao.getInstance().getUsuarioLogado();
         
-        String senhaAntiga = fieldTextSenhaAtual.getText();
-        String senhaNova = fieldTextSenhaNova.getText();
-        
         if (usuario != null) {
             this.textNome.setText(usuario.getNome());
             this.textCpf.setText(usuario.getCpf());
+            if (usuario.getCartao() != null) {
             this.textNumeroCartao.setText(usuario.getNumeroCartao());
-            try {
-                ControleUsuario controleUsuario = new ControleUsuario();
-                controleUsuario.trocarSenha(usuario, senhaAntiga, senhaNova);
-                controleUsuario.atualizarUsuario(usuario);
-            } catch (SenhaInvalidaException ex) {
-                System.getLogger(TelaContaAlterarSenhaController.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
         }
-
     }    
 
     private void trocarTela(AnchorPane telaAtual, String caminhoNovaTelaFXML) throws IOException {
@@ -74,13 +65,25 @@ public class TelaContaAlterarSenhaController implements Initializable {
     
     @FXML
     private void handleButtonOk(ActionEvent event) {
-        try {
-            trocarTela(AnchorPaneSenhaAlterada, CaminhoArquivo.TELA_CONTA);
+        Usuario usuario = Sessao.getInstance().getUsuarioLogado();
+         String senhaAntiga = fieldTextSenhaAtual.getText();
+         String senhaNova = fieldTextSenhaNova.getText();
+
+         if (usuario != null && !senhaAntiga.isEmpty() && !senhaNova.isEmpty()) {
+           try {
+                ControleUsuario controleUsuario = new ControleUsuario();
+                controleUsuario.trocarSenha(usuario, senhaAntiga, senhaNova);
+                controleUsuario.atualizarUsuario(usuario);
+                trocarTela(AnchorPaneSenhaAlterada, CaminhoArquivo.TELA_CONTA);
+            } catch (SenhaInvalidaException ex) {
+
+                System.getLogger(TelaContaAlterarSenhaController.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                
         } catch (IOException ex) {
             System.err.println("Erro ao carregar a Tela: " + ex.getMessage());
             ex.printStackTrace();
         }
         
     }
-    
+}  
 }

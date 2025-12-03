@@ -4,8 +4,8 @@ public class CEstudante extends Cartao implements ICComercial{
     private int mesesVencimento;
     private double saldo;
 
-    public CEstudante(){
-        super();
+    public CEstudante(int numerocartao){
+        super(numerocartao);
         saldo = 0;
         mesesVencimento = 6;
         modalidade = "Estudante";

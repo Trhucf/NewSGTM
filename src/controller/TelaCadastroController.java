@@ -26,14 +26,12 @@ import javafx.scene.control.MenuItem;
 
 public class TelaCadastroController implements Initializable {
 
-    // --- Constantes de Estilo ---
     private static final String SUCESSO_COR = "green";
     private static final String ERRO_COR = "#EC5800";
     private static final String ESTILO_ERRO_BORDA = "-fx-border-color: " + ERRO_COR + "; -fx-border-width: 2px;";
     
     List<String> modalidades = List.of("Corporativo", "Estudante", "Idoso", "Simples", "Especial");
     
-    // --- FXML Fields ---
     @FXML
     private TextField textFieldModalidade;
     @FXML
@@ -115,22 +113,18 @@ public class TelaCadastroController implements Initializable {
     }
 
     private void trocarParaTelaLogin(String caminhoNovaTelaFXML) throws IOException {
-        // 1. Carrega a nova tela
         AnchorPane novaTela = FXMLLoader.load(getClass().getResource(caminhoNovaTelaFXML));
 
-        // 2. Define qual painel será substituído
         AnchorPane painelAtual = anchorPaneTelaCadastro;
 
-        // SEGURO: Se a variável do FXML falhou (estiver nula), pegamos o painel através do botão
         if (painelAtual == null) {
             if (buttonCadastro.getScene() != null) {
                 painelAtual = (AnchorPane) buttonCadastro.getScene().getRoot();
             } else {
-                throw new IOException("Não foi possível localizar a tela atual para realizar a troca.");
+                throw new IOException("Erro ao trocar de tela!");
             }
         }
-        
-        // 3. Faz a troca
+
         painelAtual.getChildren().setAll(novaTela);
     }
 
@@ -153,11 +147,16 @@ public class TelaCadastroController implements Initializable {
 
         String senha = passwordFieldSenha.getText();
         if (senha.length() < 4 || senha.length() > 8) {
-            setStatus("Erro: Crie uma senha de 4 a 8 dígitos!", ERRO_COR);
+            setStatus("Crie uma senha de 4 a 8 dígitos!", ERRO_COR);
             passwordFieldSenha.setStyle(ESTILO_ERRO_BORDA);
             return false;
         }
-
+        String cpf = textFieldCPF.getText();
+        if(cpf.length() != 11 ){
+            setStatus("CPF invalido!", ERRO_COR );
+             textFieldCPF.setStyle(ESTILO_ERRO_BORDA);
+            return false;
+        }
         return true;
     }
 
@@ -175,7 +174,6 @@ public class TelaCadastroController implements Initializable {
         final String nome = textFieldNome.getText().trim().toUpperCase();
         final String cpf = textFieldCPF.getText().trim();
         
-        // 1. Pegamos o NOME da modalidade (String)
         final String nomeModalidade = textFieldModalidade.getText(); 
         
         final String senha = passwordFieldSenha.getText();
@@ -186,33 +184,27 @@ public class TelaCadastroController implements Initializable {
             
             try {
                 controleUsuario.confirmarCpf(cpf);
-                setStatus("Erro: CPF já cadastrado no sistema!", ERRO_COR);
+                setStatus("CPF já cadastrado no sistema!", ERRO_COR);
                 textFieldCPF.setStyle(ESTILO_ERRO_BORDA);
                 return;
             } catch (CpfInvalidoException e) {
-                // CPF válido (não encontrado), pode continuar
             }
             
             Usuario novoUsuario = controleUsuario.criarUsuario(nome, cpf, senha);
             
-            // --- CORREÇÃO: CONVERSÃO DE STRING PARA INT ---
             int codigoModalidade;
             
-            // Verifique se estes números batem com a ordem no seu ControleCartao.java
-            // 1:Estudante, 2:Idoso, 3:Especial, 4:Corporativo, 5:Simples
             switch (nomeModalidade) {
                 case "Estudante":   codigoModalidade = 1; break;
                 case "Idoso":       codigoModalidade = 2; break;
                 case "Especial":    codigoModalidade = 3; break;
                 case "Corporativo": codigoModalidade = 4; break;
                 case "Simples":     codigoModalidade = 5; break;
-                default:            codigoModalidade = 5; // Valor padrão (Simples) se não achar
+                default:            codigoModalidade = 5; 
             }
-            // ----------------------------------------------
 
             ControleCartao controleCartao = new ControleCartao();
             
-            // AGORA SIM: Passamos o 'codigoModalidade' (int) e não a String
             controleCartao.criarCartao(novoUsuario, codigoModalidade);
             
             controleUsuario.arquivarUsuario(novoUsuario);

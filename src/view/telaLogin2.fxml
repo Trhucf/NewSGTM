@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPaneTelaLogin" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: E00079;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaLogin2Controller">
+<AnchorPane id="AnchorPane" fx:id="anchorPaneTelaLogin" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: E00078;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaLogin2Controller">
    <children>
       <AnchorPane layoutX="103.0" layoutY="73.0" prefHeight="254.0" prefWidth="394.0" style="-fx-background-color: F5F5F5; -fx-background-radius: 20;">
          <children>

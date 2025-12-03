@@ -51,7 +51,7 @@ public class TelaBloquearCartãoController implements Initializable {
     @FXML
     private void handleButtonOk(ActionEvent event) {
         try {
-            trocarTela(AnchorPaneCartaoBloqueado, CaminhoArquivo.TELA_CARTAO); 
+            trocarTela(AnchorPaneCartaoBloqueado, CaminhoArquivo.TELA_INICIAL); 
         } catch (IOException ex) {
             System.err.println("Erro ao carregar a Tela: " + ex.getMessage());
             ex.printStackTrace();

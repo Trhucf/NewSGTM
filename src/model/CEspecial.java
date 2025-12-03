@@ -3,8 +3,8 @@ package model;
 public class CEspecial extends Cartao {
     private int mesesVencimento;
 
-    public CEspecial(){
-        super();
+    public CEspecial(int numerocartao){
+        super(numerocartao);
         mesesVencimento = 12;
         modalidade = "Especial";
 

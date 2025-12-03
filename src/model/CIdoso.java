@@ -3,8 +3,8 @@ package model;
 public class CIdoso extends Cartao {
     private int mesesVencimento;
 
-    public CIdoso(){
-        super();
+    public CIdoso(int numerocartao){
+        super(numerocartao);
         mesesVencimento = 12;
         modalidade = "Idoso";
     }

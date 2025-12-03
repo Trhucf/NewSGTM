@@ -4,8 +4,8 @@ public class CSimples extends Cartao implements ICComercial{
     private int mesesVencimento;
     private double saldo;
 
-    public CSimples(){
-        super();
+    public CSimples(int numerocartao){
+        super(numerocartao);
         saldo = 0;
         mesesVencimento = 12;
         modalidade = "Simples";

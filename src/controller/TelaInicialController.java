@@ -38,31 +38,23 @@ public class TelaInicialController implements Initializable {
     private Button buttonConta;
     @FXML
     private Button buttonCartao;
-    
-    // Campos de Pesquisa
     @FXML
     private TextField pesquisarEstacao;
     @FXML
     private TextField pesquisarLinha;
-    
     @FXML
     private Button verLinha;
-
-    // Listas para o Autocomplete
     private ArrayList<String> todasEstacoes;
     private ArrayList<String> todasLinhas;
     @FXML
     private Button verEstacao;
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // 1. Carrega os dados na memória (caso ainda não estejam)
+
         ControleEstacaoLinha.criarEstacoesLinhas();
         
-        // 2. Prepara a lista de Estações
         todasEstacoes = ControleEstacaoLinha.getNomeEstacoes();
-        
-        // 3. Prepara a lista de Linhas (Extraindo manualmente da lista de objetos)
+    
         todasLinhas = new ArrayList<>();
         if (ControleEstacaoLinha.listaLinhas != null) {
             for (Linha l : ControleEstacaoLinha.listaLinhas) {
@@ -70,20 +62,17 @@ public class TelaInicialController implements Initializable {
             }
         }
         
-        // 4. Configura o Autocomplete nos campos
         configurarAutocomplete(txtOrigem, todasEstacoes);
         configurarAutocomplete(txtDestino, todasEstacoes);
         configurarAutocomplete(pesquisarEstacao, todasEstacoes);
         configurarAutocomplete(pesquisarLinha, todasLinhas);
     }
 
-    // --- LÓGICA DE CALCULAR TRAJETO ---
     @FXML
     private void handleCalcularTrajeto(ActionEvent event) {
         String src = txtOrigem.getText();
         String trg = txtDestino.getText();
 
-        // Validação
         if (src == null || src.trim().isEmpty() || trg == null || trg.trim().isEmpty()) {
             mostrarAlerta("Campos Vazios", "Por favor, preencha a origem e o destino.");
             return;
@@ -98,7 +87,6 @@ public class TelaInicialController implements Initializable {
                 return;
             }
 
-            // Exibe resultado
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Rota Encontrada");
             alert.setHeaderText("O trajeto calculado é:");
@@ -111,7 +99,6 @@ public class TelaInicialController implements Initializable {
         }
     }
 
-    // --- LÓGICA DE PESQUISAR ESTAÇÃO ---
     @FXML
     private void handleVerEstacao(ActionEvent event) {
         String nomeBusca = pesquisarEstacao.getText();
@@ -136,7 +123,6 @@ public class TelaInicialController implements Initializable {
         }
     }
 
-    // --- LÓGICA DE PESQUISAR LINHA ---
     @FXML
     private void handleVerLinha(ActionEvent event) {
         String nomeBusca = pesquisarLinha.getText();
@@ -147,7 +133,7 @@ public class TelaInicialController implements Initializable {
         }
 
         Linha linhaEncontrada = null;
-        // Busca manual na lista
+
         for (Linha l : ControleEstacaoLinha.listaLinhas) {
             if (l.getNome().equalsIgnoreCase(nomeBusca)) {
                 linhaEncontrada = l;
@@ -172,7 +158,6 @@ public class TelaInicialController implements Initializable {
         }
     }
 
-    // --- NAVEGAÇÃO ENTRE TELAS ---
     @FXML
     private void handleButtonConta(ActionEvent event) {
         navegarParaTela(CaminhoArquivo.TELA_CONTA, event);
@@ -199,7 +184,6 @@ public class TelaInicialController implements Initializable {
         }
     }
 
-    // --- MÉTODOS AUXILIARES ---
     private void mostrarAlerta(String titulo, String mensagem) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Sistema de Transporte");

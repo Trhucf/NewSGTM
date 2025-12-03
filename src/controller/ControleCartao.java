@@ -9,35 +9,39 @@ import model.CEspecial;
 import model.CCorporativo;
 import model.CSimples;
 import model.ICComercial ;
+import data.RepositorioArquivoUsuario;
 
 public class ControleCartao {
 
+    private RepositorioArquivoUsuario Usuario = new RepositorioArquivoUsuario();
+
     public void criarCartao(Usuario us, int modalidade){
+        int numero = Usuario.gerarNumeroCartao();
         Cartao cr = null; //Para reduzir o código foi criada a váriavel do tipo Cartao e a instacia de suas filhas é atribuida a ela, assim o polimorfirsmo é aproveitado.
         switch(modalidade){
             case 1:
             {
-                cr = new CEstudante();
+                cr = new CEstudante(numero);
                 break;
             }
             case 2:
             {
-                cr = new CIdoso();
+                cr = new CIdoso(numero);
                 break;
             }
             case 3:
             {
-                cr = new CEspecial();
+                cr = new CEspecial(numero);
                 break;
             }
             case 4:
             {
-                cr = new CCorporativo();
+                cr = new CCorporativo(numero);
                 break;
             }
             case 5:
             {
-                cr = new CSimples();
+                cr = new CSimples(numero);
                 break;
             }
         }

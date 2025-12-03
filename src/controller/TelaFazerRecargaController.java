@@ -38,18 +38,7 @@ public class TelaFazerRecargaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        Usuario usuario = Sessao.getInstance().getUsuarioLogado();
-        if(usuario != null){
-             valor = Double.parseDouble(textFieldValor.getText());
 
-            ControleCartao controlecartao = new ControleCartao();
-            ControleUsuario controleUsuario = new ControleUsuario();
-            controlecartao.recarga(valor, usuario);
-            
-            controleUsuario.atualizarUsuario(usuario);
-            
-        }
     }    
     
     private void trocarTela(AnchorPane telaAtual, String caminhoNovaTelaFXML) throws IOException {
@@ -60,12 +49,38 @@ public class TelaFazerRecargaController implements Initializable {
 
     @FXML
     private void handleButtonOk(ActionEvent event) {
-        try {
-            trocarTela(AnchorPaneRecarga, CaminhoArquivo.TELA_CARTAO); 
+    
+          Usuario usuario = Sessao.getInstance().getUsuarioLogado();
+          String valorTexto = textFieldValor.getText();
+
+        if(usuario != null && !textFieldValor.getText().isEmpty()){
+            try{
+            double valor = Double.parseDouble(textFieldValor.getText());
+
+            ControleCartao controlecartao = new ControleCartao();
+            ControleUsuario controleUsuario = new ControleUsuario();
+
+            controlecartao.recarga(valor, usuario);
+            
+            controleUsuario.atualizarUsuario(usuario);
+
+            trocarTela(AnchorPaneRecarga, CaminhoArquivo.TELA_CARTAO);
+
+        } catch (NumberFormatException e) {
+            
+                System.err.println("O valor deve ser um número. Tente novamente.");
+        
         } catch (IOException ex) {
+
             System.err.println("Erro ao carregar a Tela: " + ex.getMessage());
             ex.printStackTrace();
+
+        } 
+    }
+    else if (usuario != null) {
+            System.out.println("Por favor, digite um valor de recarga.");
         }
     }
+ }
     
-}
+

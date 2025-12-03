@@ -3,8 +3,8 @@ public class CCorporativo extends Cartao implements ICComercial{
     private double saldo;
     private int mesesVencimento;
 
-    public CCorporativo(){
-        super();
+    public CCorporativo(int numerocartao){
+        super(numerocartao);
         saldo = 0;
         mesesVencimento = 12;
         modalidade = "Corporativo";

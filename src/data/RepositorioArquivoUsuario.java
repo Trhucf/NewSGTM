@@ -12,6 +12,35 @@ import model.Usuario;
     public class RepositorioArquivoUsuario{
         private final String ARQUIVO = "usuario.ser";
 
+        private int NCartao;
+
+        public RepositorioArquivoUsuario(){
+            calcularNCartao();
+        }
+        
+        private void calcularNCartao(){
+         ArrayList<Usuario> usuarios = getAllUsuarios();
+         int maxNumero= 0;
+
+         if (usuarios != null && !usuarios.isEmpty()) {
+            for (Usuario usuario : usuarios) {
+                if (usuario.getCartao() != null) {
+                    int nAtual = usuario.getCartao().getNumero();
+                    if (nAtual > maxNumero) {
+                        maxNumero = nAtual;
+                    }
+                }
+            }
+        }
+          this.NCartao = maxNumero + 1;
+        }
+
+        public int gerarNumeroCartao() {
+            int numero = this.NCartao;
+            this.NCartao++;
+            return numero;
+        }
+
         public ArrayList<Usuario> getAllUsuarios() {
             ArrayList<Usuario> usuarios = new ArrayList<>();
             File arquivoUsuarios = new File(ARQUIVO);
