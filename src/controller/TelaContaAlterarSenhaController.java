@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import model.Sessao;
 import model.Usuario;
 import util.CaminhoArquivo;
@@ -33,6 +34,12 @@ public class TelaContaAlterarSenhaController implements Initializable {
     private Button buttonOk;
     @FXML
     private AnchorPane AnchorPaneSenhaAlterada;
+    @FXML
+    private Text textNome;
+    @FXML
+    private Text textCpf;
+    @FXML
+    private Text textNumeroCartao;
 
     /**
      * Initializes the controller class.
@@ -46,6 +53,9 @@ public class TelaContaAlterarSenhaController implements Initializable {
         String senhaNova = fieldTextSenhaNova.getText();
         
         if (usuario != null) {
+            this.textNome.setText(usuario.getNome());
+            this.textCpf.setText(usuario.getCpf());
+            this.textNumeroCartao.setText(usuario.getNumeroCartao());
             try {
                 ControleUsuario controleUsuario = new ControleUsuario();
                 controleUsuario.trocarSenha(usuario, senhaAntiga, senhaNova);
