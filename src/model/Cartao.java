@@ -15,6 +15,7 @@ public class Cartao implements Serializable{
     //Ao ser criado o usuário o cartao é ativado e portanto sua data de criação passa a ser a mesma da do cadastro do usuário
     public Cartao(){
         dataCriacao = LocalDate.now();
+        saldo = 0.0;
     }    
     
     public int getMesesVencimento(){

@@ -47,7 +47,8 @@ public class TelaCartãoController implements Initializable {
     private Button buttonFazerRecarga;
     @FXML
     private Text textCpf;
-
+    @FXML
+    private Text textFieldSaldo;
     /**
      * Initializes the controller class.
      */
@@ -60,6 +61,10 @@ public class TelaCartãoController implements Initializable {
             this.textNumeroCartao.setText(usuario.getNumeroCartao());
             this.textDataCriacao.setText(usuario.getDataCartaoC());
             this.textDataVencimento.setText(usuario.getDataCartaoV());
+            this.textCpf.setText(usuario.getCpf());
+            //this.textFieldSaldo.setText(usuario.getSaldoC());
+
+
 
         }
     }    
