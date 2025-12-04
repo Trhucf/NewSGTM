@@ -58,17 +58,18 @@ public class TelaCartãoController implements Initializable {
         Usuario usuario = Sessao.getInstance().getUsuarioLogado();
         
         if (usuario != null) {
-            this.textModalildade.setText(usuario.getModalidadeCartao());
             this.textCpf.setText(usuario.getCpf());
             
             //verifica se o cartão n foi bloqueado
             if(usuario.getCartao() != null){
+                this.textModalildade.setText(usuario.getModalidadeCartao());
                 this.textNumeroCartao.setText(usuario.getNumeroCartao());
                 this.textDataCriacao.setText(usuario.getDataCartaoC());
                 this.textDataVencimento.setText(usuario.getDataCartaoV());
                 this.textFieldSaldo.setText(usuario.getSaldoC());
 
             }else{
+                this.textModalildade.setText("CARTÃO BLOQUEADO");
                 this.textNumeroCartao.setText("CARTÃO BLOQUEADO");
                 this.textDataCriacao.setText("CARTÃO BLOQUEADO");
                 this.textDataVencimento.setText("CARTÃO BLOQUEADO");
@@ -84,37 +85,55 @@ public class TelaCartãoController implements Initializable {
 
     @FXML
     private void handleButtonRenovarCartao(ActionEvent event) {
-        try {
-            trocarTela(AnchorPaneCartao, "/view/telaRenovarCartão.fxml"); 
-        } catch (IOException ex) {
-            System.err.println("Erro ao carregar a Tela: " + ex.getMessage());
-            ex.printStackTrace();
-        }
+        Usuario usuario = Sessao.getInstance().getUsuarioLogado();
+
+         if(usuario.getCartao() != null){
+             try {
+                trocarTela(AnchorPaneCartao, "/view/telaRenovarCartão.fxml"); 
+            } catch (IOException ex) {
+                System.err.println("Erro ao carregar a Tela: " + ex.getMessage());
+                ex.printStackTrace();
+            }
+         }else{
+             System.err.println("Erro o cartão está bloqueado: ");
+         }
+
+        
         
     }
 
     @FXML
     private void handleButtonBloquearCartao(ActionEvent event) {
+         Usuario usuario = Sessao.getInstance().getUsuarioLogado();
 
-         try {
-            trocarTela(AnchorPaneCartao, "/view/telaBloquearCartão.fxml"); 
-        } catch (IOException ex) {
-            System.err.println("Erro ao carregar a Tela: " + ex.getMessage());
-            ex.printStackTrace();
-        }
-        
-
+         if(usuario.getCartao() != null){
+             try {
+                trocarTela(AnchorPaneCartao, "/view/telaBloquearCartão.fxml"); 
+            } catch (IOException ex) {
+                System.err.println("Erro ao carregar a Tela: " + ex.getMessage());
+                ex.printStackTrace();
+            }
+         }else{
+             System.err.println("Erro o cartão está bloqueado: ");
+         }
     }
 
     @FXML
     private void handleButtonFazerRecarga(ActionEvent event) {
+         Usuario usuario = Sessao.getInstance().getUsuarioLogado();
 
-         try {
-            trocarTela(AnchorPaneCartao, "/view/telaFazerRecarga.fxml"); 
-        } catch (IOException ex) {
-            System.err.println("Erro ao carregar a Tela: " + ex.getMessage());
-            ex.printStackTrace();
-        }
+         if(usuario.getCartao() != null){
+             try {
+                trocarTela(AnchorPaneCartao, "/view/telaFazerRecarga.fxml"); 
+            } catch (IOException ex) {
+                System.err.println("Erro ao carregar a Tela: " + ex.getMessage());
+                ex.printStackTrace();
+            }
+         }else{
+            System.err.println("Erro o cartão está bloqueado: ");
+         }
+         
+         
 
     }
 

@@ -13,7 +13,7 @@
          <children>
             <ImageView fitHeight="66.0" fitWidth="103.0" layoutX="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../Downloads/SGTM.png" />
+                  <Image url="@../icons/SGTM.png" />
                </image>
             </ImageView>
          </children>

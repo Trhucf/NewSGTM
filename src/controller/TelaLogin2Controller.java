@@ -22,7 +22,7 @@ import util.CaminhoArquivo;
 public class TelaLogin2Controller implements Initializable {
 
     @FXML
-    private AnchorPane anchorPaneTelaLogin; 
+    private AnchorPane anchorPaneTelaLogin; // Certifique-se que o fx:id do painel principal é este
     @FXML
     private TextField textFildLogin;
     @FXML
@@ -59,7 +59,7 @@ public class TelaLogin2Controller implements Initializable {
                 Sessao.getInstance().setUsuarioLogado(login);
                 trocarTela(anchorPaneTelaLogin, CaminhoArquivo.TELA_INICIAL); 
             } catch(IOException ex) {
-              System.err.println("Erro ao carregar tela inicial: " + ex.getMessage());
+              System.err.println("Erro ao carregar tela da conta: " + ex.getMessage());
                 ex.printStackTrace();
             } catch (Exception e) { 
                 System.err.println("Erro: " + e.getMessage());
