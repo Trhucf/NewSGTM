@@ -12,7 +12,7 @@ import model.Usuario;
     public class RepositorioArquivoUsuario{
         private final String ARQUIVO = "usuario.ser";
 
-        private int NCartao;
+        private static int NCartao;
 
         public RepositorioArquivoUsuario(){
             calcularNCartao();
