@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import model.Sessao;
 import model.Usuario;
 import util.CaminhoArquivo;
@@ -28,6 +29,8 @@ public class TelaRenovarCartaoController implements Initializable {
     private Button buttonOk;
     @FXML
     private AnchorPane AnchorPaneCartaoRenovado;
+    @FXML
+    private Text fieldNovaDataV;
 
     /**
      * Initializes the controller class.
@@ -41,7 +44,7 @@ public class TelaRenovarCartaoController implements Initializable {
             controlecartao.renovacao(usuario);
             ControleUsuario controleUsuario = new ControleUsuario();
             controleUsuario.atualizarUsuario(usuario);
-            
+            this.fieldNovaDataV.setText(usuario.getDataCartaoV());
         }
     }    
 
