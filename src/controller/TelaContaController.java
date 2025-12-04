@@ -56,12 +56,18 @@ public class TelaContaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         Usuario usuario = Sessao.getInstance().getUsuarioLogado();
         
         if (usuario != null) {
             this.textNome.setText(usuario.getNome());
             this.textCpf.setText(usuario.getCpf());
-            this.textNumeroCartao.setText(usuario.getNumeroCartao());
+            // verifica se o cartão n foi block
+            if(usuario.getCartao() != null){
+                this.textNumeroCartao.setText(usuario.getNumeroCartao());
+            }else{
+                this.textNumeroCartao.setText("CARTÃO BLOQUEADO");
+            }
         }
     }    
         

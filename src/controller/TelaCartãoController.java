@@ -49,6 +49,7 @@ public class TelaCartãoController implements Initializable {
     private Text textCpf;
     @FXML
     private Text textFieldSaldo;
+
     /**
      * Initializes the controller class.
      */
@@ -58,14 +59,21 @@ public class TelaCartãoController implements Initializable {
         
         if (usuario != null) {
             this.textModalildade.setText(usuario.getModalidadeCartao());
-            this.textNumeroCartao.setText(usuario.getNumeroCartao());
-            this.textDataCriacao.setText(usuario.getDataCartaoC());
-            this.textDataVencimento.setText(usuario.getDataCartaoV());
             this.textCpf.setText(usuario.getCpf());
-            this.textFieldSaldo.setText(usuario.getSaldoC());
+            
+            //verifica se o cartão n foi bloqueado
+            if(usuario.getCartao() != null){
+                this.textNumeroCartao.setText(usuario.getNumeroCartao());
+                this.textDataCriacao.setText(usuario.getDataCartaoC());
+                this.textDataVencimento.setText(usuario.getDataCartaoV());
+                this.textFieldSaldo.setText(usuario.getSaldoC());
 
-
-
+            }else{
+                this.textNumeroCartao.setText("CARTÃO BLOQUEADO");
+                this.textDataCriacao.setText("CARTÃO BLOQUEADO");
+                this.textDataVencimento.setText("CARTÃO BLOQUEADO");
+                this.textFieldSaldo.setText("CARTÃO BLOQUEADO");
+            }
         }
     }    
     
