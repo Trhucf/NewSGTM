@@ -44,9 +44,16 @@ public class TelaCadastroController implements Initializable {
     private PasswordField passwordFieldSenha;
     @FXML
     private Label labelStatusCadastro;
-    @FXML
+     @FXML
     private AnchorPane anchorPaneTelaCadastro; 
+     @FXML
     private List<TextInputControl> camposDeEntrada;
+    @FXML
+    private AnchorPane AnchorPaneCadastro;
+    @FXML
+    private TextField textFielCPF;
+    @FXML
+    private PasswordField passwordFielSenha;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
