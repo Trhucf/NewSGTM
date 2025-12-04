@@ -37,24 +37,10 @@ public class TelaContaAlterarSenhaController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    Usuario usuario = Sessao.getInstance().getUsuarioLogado();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        Usuario usuario = Sessao.getInstance().getUsuarioLogado();
-        
-        String senhaAntiga = fieldTextSenhaAtual.getText();
-        String senhaNova = fieldTextSenhaNova.getText();
-        
-        if (usuario != null) {
-            try {
-                ControleUsuario controleUsuario = new ControleUsuario();
-                controleUsuario.trocarSenha(usuario, senhaAntiga, senhaNova);
-                controleUsuario.atualizarUsuario(usuario);
-            } catch (SenhaInvalidaException ex) {
-                System.getLogger(TelaContaAlterarSenhaController.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-            }
-        }
-
     }    
 
     private void trocarTela(AnchorPane telaAtual, String caminhoNovaTelaFXML) throws IOException {
@@ -65,6 +51,17 @@ public class TelaContaAlterarSenhaController implements Initializable {
     @FXML
     private void handleButtonOk(ActionEvent event) {
         try {
+            String senhaAntiga = fieldTextSenhaAtual.getText();
+            String senhaNova = fieldTextSenhaNova.getText();
+        
+            if (usuario != null) {
+            try {
+                ControleUsuario controleUsuario = new ControleUsuario();
+                controleUsuario.trocarSenha(usuario, senhaAntiga, senhaNova);
+            } catch (SenhaInvalidaException ex) {
+                System.getLogger(TelaContaAlterarSenhaController.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        }
             trocarTela(AnchorPaneSenhaAlterada, CaminhoArquivo.TELA_CONTA);
         } catch (IOException ex) {
             System.err.println("Erro ao carregar a Tela: " + ex.getMessage());
