@@ -22,7 +22,7 @@ import util.CaminhoArquivo;
 public class TelaLogin2Controller implements Initializable {
 
     @FXML
-    private AnchorPane anchorPaneTelaLogin; // Certifique-se que o fx:id do painel principal é este
+    private AnchorPane anchorPaneTelaLogin; 
     @FXML
     private TextField textFildLogin;
     @FXML
