@@ -31,6 +31,12 @@ public class TelaRenovarCartaoController implements Initializable {
     private AnchorPane AnchorPaneCartaoRenovado;
     @FXML
     private Text fieldNovaDataV;
+    @FXML
+    private Text textNumero;
+    @FXML
+    private Text textCpf;
+    @FXML
+    private Text textSaldo;
 
     /**
      * Initializes the controller class.
@@ -40,6 +46,12 @@ public class TelaRenovarCartaoController implements Initializable {
         // TODO
         Usuario usuario = Sessao.getInstance().getUsuarioLogado();
         if(usuario != null){
+            this.textCpf.setText(usuario.getCpf());
+            this.textNumero.setText(usuario.getNumeroCartao());
+            this.textSaldo.setText(usuario.getSaldoC());
+
+
+
             ControleCartao controlecartao = new ControleCartao();
             controlecartao.renovacao(usuario);
             ControleUsuario controleUsuario = new ControleUsuario();

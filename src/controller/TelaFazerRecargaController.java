@@ -31,13 +31,28 @@ public class TelaFazerRecargaController implements Initializable {
     private Button buttonOk;
     @FXML
     private TextField textFieldValor;
-
+    /*@FXML
+    private Text textNumero;
+    @FXML
+    private Text textCpf;
+    @FXML
+    private Text textSaldo;
+    */
     public double valor;
+
+    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        /*Usuario usuario = Sessao.getInstance().getUsuarioLogado();
+        if(usuario != null){
+            this.textCpf.setText(usuario.getCpf());
+            this.textNumero.setText(usuario.getNumeroCartao());
+            this.textSaldo.setText(usuario.getSaldoC());
+        }*/
 
     }    
     
