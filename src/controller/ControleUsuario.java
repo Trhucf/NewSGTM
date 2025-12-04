@@ -36,6 +36,7 @@ public boolean confirmarSenha(String cpf, String senha) throws SenhaInvalidaExce
     public void trocarSenha(Usuario user, String senhaAntiga, String senhaNova) throws SenhaInvalidaException{
         if(user.getSenha().equals(senhaAntiga)){
             user.setSenha(senhaNova);
+            repositorioUsuario.atualizarUsuario(user);
         } else{
                 throw new SenhaInvalidaException();
         }
